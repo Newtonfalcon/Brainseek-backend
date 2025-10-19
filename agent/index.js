@@ -1,13 +1,30 @@
 import express from "express"
 import cors from "cors"
-
+import dotenv from "dotenv"
+import cookieParser from "cookie-parser"
 import { agent } from "./research.js"
+import { connectDb } from "./libs/connectDb.js"
+import authRoute from "./routes/auth.route.js"
+dotenv.config()
+
+
 
 const app = express()
 app.use(express.json())
 app.use(cors({origin: "*"}))
+app.use(cookieParser())
 
 
+const port = process.env.PORT || 7116
+
+connectDb()
+app.listen(port, ()=>{
+      console.log(`Server is running on port ${port}`)
+})
+
+
+
+app.use('/api/auth', authRoute)
 
 app.post('/', async (req, res)=>{
 
@@ -36,11 +53,5 @@ app.post('/', async (req, res)=>{
       }
      
 
-})
-
-const port = 5000
-
-app.listen(port, ()=>{
-      console.log(`Server is running on port ${port}`)
 })
 

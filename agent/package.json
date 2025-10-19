@@ -2,23 +2,14 @@
   "name": "agent",
   "version": "1.0.0",
   "main": "index.js",
-  "type": "module",
+  "type":"module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "@langchain/core": "^0.3.78",
-    "@langchain/google-genai": "^0.2.18",
-    "@langchain/langgraph": "^0.4.9",
-    "cors": "^2.8.5",
-    "dotenv": "^17.2.3",
-    "express": "^5.1.0",
-    "node-fetch": "^3.3.2",
-    "tavily": "^1.0.2",
-    "zod": "^3.25.76"
-  }
+  "description": ""
 }
