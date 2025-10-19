@@ -23,3 +23,49 @@ export const register = async(req, res)=>{
             res.status(500).json({error: error.message});
       }
 }
+
+export const login = async (req, res) => {
+      const {email, password} = req.body
+
+      try {
+            
+     
+      
+            if(!email || !password){
+                  return res.status(400).json({message: "All fields required"})
+            }
+
+            const user = await User.findOne({email})
+            if(!user){
+                  return res.status(400).json({message:"incorrect credentials"})
+            }
+
+            const comparePassword = bcrypt.compare(password, user.password)
+            if(!comparePassword){
+                  return res.status(400).json({message: "incorrect credentials"})
+            }
+            setToken(user._id, res)
+            return res.status(200).json({
+                  message:`welcome back ${user.name}`,
+                  name: user.name,
+                  email:user.email,
+                  id: user._id
+            })
+            
+
+
+
+      } catch (error) {
+            
+            return res.status(500).json(error.message)
+      }
+      
+}
+
+export const logout = (req, res) => {
+      res.cookie("token", "", {
+            httpOnly: true,
+            expires: new Date(0),
+      });
+      res.status(200).json({message: "Logged out successfully"});
+}

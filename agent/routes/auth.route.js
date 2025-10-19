@@ -1,8 +1,10 @@
 import {Router} from "express"
-import { register } from "../controllers/auth.controllers.js"
+import { login, register, logout } from "../controllers/auth.controllers.js"
 
 const authRoute = Router()
 
 authRoute.post('/register', register)
+authRoute.post("/login", login)
+authRoute.post("/logout", logout)
 
 export default authRoute
