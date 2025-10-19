@@ -5,6 +5,8 @@ import cookieParser from "cookie-parser"
 import { agent } from "./research.js"
 import { connectDb } from "./libs/connectDb.js"
 import authRoute from "./routes/auth.route.js"
+import chatRouter from "./routes/chat.route.js"
+import { authMiddleware } from "./libs/auth.middleware.js"
 dotenv.config()
 
 
@@ -25,7 +27,7 @@ app.listen(port, ()=>{
 
 
 app.use('/api/auth', authRoute)
-
+app.use('/api/chat',authMiddleware, chatRouter)
 app.post('/', async (req, res)=>{
 
 
