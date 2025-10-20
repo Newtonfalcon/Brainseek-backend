@@ -7,6 +7,7 @@ import { connectDb } from "./libs/connectDb.js"
 import authRoute from "./routes/auth.route.js"
 import chatRouter from "./routes/chat.route.js"
 import { authMiddleware } from "./libs/auth.middleware.js"
+import messageRouter from "./routes/message.route.js"
 dotenv.config()
 
 
@@ -28,6 +29,8 @@ app.listen(port, ()=>{
 
 app.use('/api/auth', authRoute)
 app.use('/api/chat',authMiddleware, chatRouter)
+app.use('/api/message',authMiddleware, messageRouter)
+
 app.post('/', async (req, res)=>{
 
 

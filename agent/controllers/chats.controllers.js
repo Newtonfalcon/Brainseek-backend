@@ -21,3 +21,24 @@ export const createChat = async (req, res) => {
       }
       
 }
+
+export const getChat = async (req, res) => {
+      const chatId = req.user._id
+      
+
+      try {
+            if(!chatId){
+                  return res.status(400).json({message:"no chatId"})
+            } 
+            const chats = await Chat.find({userId:chatId})
+            if (!chats) {
+                  return res.status(400).json({message:" no chats found in Db!"})
+            }
+
+            return res.status(200).json(chats)
+
+            
+      } catch (error) {
+            return res.status(500).json({message: error.message})
+      }
+}
