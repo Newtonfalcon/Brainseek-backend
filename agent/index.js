@@ -14,8 +14,9 @@ dotenv.config()
 
 const app = express()
 app.use(express.json())
-app.use(cors({origin: "*", credentials:true}))
 app.use(cookieParser())
+app.use(cors({origin: "http://172.23.123.249:3000", credentials:true}))
+
 
 
 const port = process.env.PORT || 7116
