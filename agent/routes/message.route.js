@@ -4,7 +4,7 @@ import {getMessage, postMessage, updateMessage} from "../controllers/message.con
 const messageRouter = Router();
 
 messageRouter.get("/:id", getMessage)
-messageRouter.post("/:id", postMessage);
-messageRouter.put("/:id", updateMessage)
+messageRouter.post("/", postMessage);
+messageRouter.patch("/", updateMessage)
 
 export default messageRouter;

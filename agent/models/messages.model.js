@@ -5,9 +5,10 @@ const messageSchema = new Schema({
       chatId:{
             type:mongoose.Types.ObjectId,
             ref:"Chat",
+            required:true,
           
       },
-      role:{
+      /*role:{
             enum:["user","assistant","system"],
             type:String,
             required:true,
@@ -15,7 +16,18 @@ const messageSchema = new Schema({
       content:{
             type:String,
             required:true,
-      },
+      },*/
+
+      messages:[
+            {
+                  role:{
+                        type:String,
+                  },
+                  content:{
+                        type:String,
+                  }
+            }
+      ],
       thread_id:{
             type:String
       }

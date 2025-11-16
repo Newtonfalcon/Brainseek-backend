@@ -13,9 +13,19 @@ dotenv.config()
 
 
 const app = express()
+const CLIENT_URL =  "http://10.153.58.249:5173/"
+console.log("Client URL:", CLIENT_URL);
+
+
+app.use(cors({
+  origin: CLIENT_URL,
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  exposedHeaders: ['set-cookie']
+}))
 app.use(express.json())
 app.use(cookieParser())
-app.use(cors({origin: "http://172.23.123.249:3000", credentials:true}))
 
 
 
@@ -32,7 +42,7 @@ app.use('/api/auth', authRoute)
 app.use('/api/chat',authMiddleware, chatRouter)
 app.use('/api/message',authMiddleware, messageRouter)
 
-app.post('/', async (req, res)=>{
+app.post('/api', authMiddleware, async (req, res)=>{
 
 
       try {

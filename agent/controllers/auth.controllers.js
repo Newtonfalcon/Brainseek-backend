@@ -40,10 +40,11 @@ export const login = async (req, res) => {
                   return res.status(400).json({message:"incorrect credentials"})
             }
 
-            const comparePassword = bcrypt.compare(password, user.password)
+            const comparePassword =await bcrypt.compare(password, user.password)
             if(!comparePassword){
                   return res.status(400).json({message: "incorrect credentials"})
             }
+            if(comparePassword){
             setToken(user._id, res)
             return res.status(200).json({
                   message:`welcome back ${user.name}`,
@@ -53,7 +54,7 @@ export const login = async (req, res) => {
             })
             
 
-
+      }
 
       } catch (error) {
             

@@ -28,8 +28,10 @@ export function setToken(userid, res) {
   
   res.cookie("token", token, {
     httpOnly: true,
-    secure: isProduction,  // Must be true in production for sameSite: "None"
-    sameSite: isProduction ? "None" : "Lax",  // "None" for cross-origin, "Lax" for local dev
+    secure: isProduction,
+    sameSite: isProduction ? "none" : "lax",
+     
     maxAge: 7 * 24 * 60 * 60 * 1000,
+    path: "/", // Ensure cookie is sent for all paths
   });
 }
